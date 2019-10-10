@@ -19,6 +19,35 @@
 \*------------------------------------*/
 
 :root {
+  --global-color-alpha-light: #4f95ff;
+  --global-color-alpha: #3385ff;
+  --global-color-alpha-dark: #2e77e6;
+  --global-color-transparent: #3385ffbf;
+  --global-color-x-transparent: #;
+
+  --global-color-neutral-xxxx-light: #e2e3e7;
+  --global-color-neutral-xxx-light: #caccd4;
+  --global-color-neutral-xx-light: #b5b6c0;
+  --global-color-neutral-x-light: #a0a1ad;
+  --global-color-neutral-light: #8b8c9a;
+  --global-color-neutral: #757787;
+  --global-color-neutral-dark: #606274;
+  --global-color-neutral-x-dark: #4b4c60;
+  --global-color-neutral-xx-dark: #35374d;
+  --global-color-neutral-xxx-dark: #2a2c43;
+  --global-color-neutral-xxxx-dark: #20223a;
+
+  --global-page-color: var(--color-neutral-xxxx-dark);
+  --global-page-backgroundColor: var(--color-neutral-xxxx-light);
+
+  --global-baseline: 8px;
+
+  --global-whitespace-xs: calc(var(--global-baseline)); /* = 4px */
+  --global-whitespace-sm: ...; /* = 8px */
+  --global-whitespace-md: ...; /* = 16px */
+  --global-whitespace-lg: ...; /* = 32px */
+  --global-whitespace-xl: calc(var(--global-whitespace-md) * 2); /* = 48px */
+  --global-whitespace-xxl: ...;
 }
 
 /* CSS variables here */
@@ -37,11 +66,21 @@ html {
   font-size: 16px;
   line-height: 1.5;
   font-family: 'Inter web', Helvetica, arial, sans-serif;
-  color: #20223a;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f6fa;
+  color: var(--global-page-color);
+  background-color: var(--global-page-backgroundColor);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: var(--global-color-neutral-xxxx-dark);
+  }
+  :root {
+    --global-page-color: White;
+    --global-page-backgroundColor: var(--color-neutral-xxxx-dark);
+  }
 }
 
 *,
@@ -201,6 +240,10 @@ input {
 .o-row {
   position: relative;
   padding: 24px 24px 0;
+}
+
+.o-row--body {
+  min-height: 100vh;
 }
 
 .o-row--login {
@@ -460,16 +503,24 @@ input {
   height: 100%;
 }
 
-.c-logo__path-1 {
-  fill: #20223a;
+.c-logo__path--1 {
+  fill: var(--logo__path--1--fill, var(--global-color-neutral-xxxx-dark));
 }
 
-.c-logo__path-2 {
-  fill: #3385ff;
+.c-logo__path--2 {
+  fill: var(--logo__path--2--fill, var(--global-color-alpha));
 }
 
-.c-logo__path-3 {
-  fill: #1b4186;
+.c-logo__path--3 {
+  fill: var(--logo__path--3--fill, var(--global-color-alpha-x-dark));
+}
+
+@media (prefers-color-scheme: dark) {
+  .c-logo {
+    --logo__path--1--fill: White;
+    --logo__path--2--fill: var(--logo__path--1--fill);
+    --logo__path--3--fill: var(--logo__path--1--fill);
+  }
 }
 
 /*
@@ -477,6 +528,52 @@ input {
     ---
     Card with box shadow
 */
+
+.c-card {
+  background-color: var(--global-color-neutral-xxxx-light);
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.07);
+}
+
+.c-card__body,
+.c-card__footer {
+  padding: 24px;
+}
+
+.c-card__footer {
+  border-top: 1px solid var(--global-color-neutral-xxxx-light);
+}
+
+.c-card__title {
+  font-size: 18px;
+}
+
+.c-card__body > *:last-child,
+.c-card__footer > *:last-child,
+.c-card__body > *:last-child > *:last-child,
+.c-card__footer > *:last-child > *:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 27em) {
+  .c-card__body {
+    padding: 48px;
+  }
+
+  .c-card__title {
+    margin-bottom: 48px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .c-card {
+    background-color: var(--global-color-neutral-xx-dark);
+  }
+  .c-card__footer {
+    border-top: 1px solid var(--global-color-neutral-xxxx-dark);
+    color: var(--global-color-neutral);
+  }
+}
 
 /*
     Component: Forms
@@ -497,11 +594,13 @@ input {
   font-family: 'Inter web', Helvetica, arial, sans-serif;
   width: 100%;
   border: 1px solid #e2e3e7;
+  color: var(--global-color-neutral);
   border-radius: 3px;
   line-height: 24px;
   padding: 11px 16px;
   outline: none;
   transition: all 0.15s;
+  background-color: #fff;
 }
 
 .c-input:hover {
@@ -509,9 +608,16 @@ input {
 }
 
 .c-input:focus {
-  border-color: #3385ff;
+  border-color: var(--global-color-transparent);
   box-shadow: 0 0 0 3px #3385ff4d;
   /* box-shadow: 0 0 0 3px rgba(51, 133, 255, .3); */
+}
+
+@media (prefers-color-scheme: dark) {
+  .c-input {
+    background-color: var(--global-color-neutral-xxxx-dark);
+    border: var(--global-color-neutral-xxxx-dark);
+  }
 }
 
 /*
@@ -521,6 +627,19 @@ input {
 */
 
 .c-label {
+  font-size: 14px;
+  color: var(--global-color-neutral-x-dark);
+  padding-bottom: 8px;
+}
+
+.c-label--option {
+  padding: 0 0 0 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .c-label {
+    color: var(--global-color-neutral-xx-light);
+  }
 }
 
 /* If a input is focused within the form-field class change te color of the label */
@@ -540,31 +659,31 @@ input {
 */
 
 .c-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    font-family: 'Inter web', Helvetica, arial, sans-serif;
-    color: #FFF;
-    width: 100%;
-    border: 1px solid #2E77E6;
-    border-radius: 3px;
-    background-color: #3385FF;
-    line-height: 24px;
-    padding: 11px 16px;
-    outline: none;
-    transition: all 0.15s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-family: 'Inter web', Helvetica, arial, sans-serif;
+  color: #fff;
+  width: 100%;
+  border: 1px solid #2e77e6;
+  border-radius: 3px;
+  background-color: #3385ff;
+  line-height: 24px;
+  padding: 11px 16px;
+  outline: none;
+  transition: all 0.15s ease-out;
 }
 
 .c-button:hover {
-    background-color: #4F95FF;
+  background-color: #4f95ff;
 }
 
 .c-button:focus {
- background-color: #3385ff;
+  background-color: #3385ff;
 }
 
 .c-button:active {
-    background-color: #2e77e6;
+  background-color: #2e77e6;
 }
 
 .c-button--block {
@@ -654,7 +773,7 @@ input {
     Utility classes align text or components
 */
 
-.u-align-text-center {
+.u-text-align-center {
   text-align: center;
 }
 
