@@ -22,8 +22,9 @@
   --global-color-alpha-light: #4f95ff;
   --global-color-alpha: #3385ff;
   --global-color-alpha-dark: #2e77e6;
+  --global-color-alpha-x-dark: #1b4186;
   --global-color-transparent: #3385ffbf;
-  --global-color-x-transparent: #;
+  --global-color-x-transparent: #3385ff4d;
 
   --global-color-neutral-xxxx-light: #e2e3e7;
   --global-color-neutral-xxx-light: #caccd4;
@@ -517,7 +518,7 @@ input {
 
 @media (prefers-color-scheme: dark) {
   .c-logo {
-    --logo__path--1--fill: White;
+    --logo__path--1--fill: #fff;
     --logo__path--2--fill: var(--logo__path--1--fill);
     --logo__path--3--fill: var(--logo__path--1--fill);
   }
